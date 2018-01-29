@@ -18,7 +18,7 @@ extern "C"
 JNIEXPORT jstring
 
 JNICALL
-Java_cn_com_hangsheng_neleus_MainActivity_jsload(
+Java_cn_com_hangsheng_neleus_MainActivity_loadScript(
         JNIEnv *env,
         jobject /* this */obj,
         jstring path) {

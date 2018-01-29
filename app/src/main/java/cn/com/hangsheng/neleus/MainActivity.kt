@@ -1,25 +1,35 @@
 package cn.com.hangsheng.neleus
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        NeleusAccessibilityOperator.getInstance().init()
         // Example of a call to a native method
-        sample_text.text = stringFromJNI()+"\r\n"+jsload("xxx")
+        sample_text.text = stringFromJNI()+"\r\n"+loadScript("xxx")
+        //if (isAccessibilitySettingOn(R.layout.))
+        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+        if (NeleusUtil.isAccessibilityOn(this)){
+            Log.e("Error","opened")
+        }else {
+            Log.e("Error","closed")
+            startActivity(intent)
+        }
     }
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
-    external fun stringFromJNI(): String
-    external fun jsload(path: String): String
+    private external fun stringFromJNI(): String
+    private external fun loadScript(path: String): String
 
     companion object {
 
