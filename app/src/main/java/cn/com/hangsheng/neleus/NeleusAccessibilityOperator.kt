@@ -1,13 +1,12 @@
 package cn.com.hangsheng.neleus
 
 import android.accessibilityservice.AccessibilityService
+import android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME
 import android.annotation.TargetApi
-import android.app.ActivityManager
-import android.content.Context
 import android.os.Build
 import android.view.accessibility.AccessibilityEvent
-import android.view.accessibility.AccessibilityNodeInfo
 import android.util.Log
+import android.view.accessibility.AccessibilityNodeInfo
 
 /**
  * Created by hsae on 2018/1/29.
@@ -33,6 +32,25 @@ class NeleusAccessibilityOperator {
         if (event != null) {
             mAccessibilityEvent = event
         }
-        //Log.e("AccessibilityLog","hello world!!!"+service.toString()+event.toString())
+        Log.e("NeleusAccessibilityLog","Msg!!!"+service.toString()+event.toString())
+    }
+
+    fun findNodesByText(s: String): MutableList<AccessibilityNodeInfo>? {
+        var list=getRootNodeInfo()?.findAccessibilityNodeInfosByText(s)
+        return list
+    }
+
+    private fun getRootNodeInfo():AccessibilityNodeInfo? {
+        var node:AccessibilityNodeInfo?=null
+        node = if (Build.VERSION.SDK_INT>=16){
+            mAccessibilityService?.rootInActiveWindow
+        }else {
+            mAccessibilityEvent?.source
+        }
+        return node
+    }
+    fun actionFrom(){
+        mAccessibilityService?.performGlobalAction(GLOBAL_ACTION_HOME);
     }
 }
+

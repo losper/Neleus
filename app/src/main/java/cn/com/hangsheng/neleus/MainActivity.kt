@@ -8,9 +8,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
+    fun onClick(view:android.view.View ){
+        when (view?.id) {
+            R.id.button -> {
+               startActivity(Intent(this,NeleusAccessibilityProcess::class.java))
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         NeleusAccessibilityOperator.getInstance().init()
         // Example of a call to a native method
         sample_text.text = stringFromJNI()+"\r\n"+loadScript("xxx")
@@ -30,6 +38,7 @@ class MainActivity : AppCompatActivity() {
      */
     private external fun stringFromJNI(): String
     private external fun loadScript(path: String): String
+
 
     companion object {
 

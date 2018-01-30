@@ -17,8 +17,8 @@ class NeleusUtil{
             }
 
             if (accessibilityEnabled == 1) {
-                //var settingVal=Settings.Secure.getString(context.applicationContext.contentResolver,Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
-                //Log.e("settingVal",settingVal)
+                var settingVal=Settings.Secure.getString(context.applicationContext.contentResolver,Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+                Log.e("settingVal",settingVal)
                 return true
             }
             return false

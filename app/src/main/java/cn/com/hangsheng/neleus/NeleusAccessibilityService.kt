@@ -1,5 +1,6 @@
 package cn.com.hangsheng.neleus
 import android.accessibilityservice.AccessibilityService
+import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
 import android.view.accessibility.AccessibilityEvent
 import android.util.Log
@@ -23,6 +24,9 @@ class NeleusAccessibilityService : AccessibilityService(){
     }
 
     public override fun onServiceConnected() {
+        val serviceInfo = serviceInfo
+        serviceInfo.flags = serviceInfo.flags or AccessibilityServiceInfo.FLAG_INCLUDE_NOT_IMPORTANT_VIEWS
+        setServiceInfo(serviceInfo)
         super.onServiceConnected()
         Log.e("et","test service!!!!")
         //NeleusAccessibilityOperator.getInstance().find();

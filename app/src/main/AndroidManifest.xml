@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NeleusAccessibilityProcess"
+            android:process=":BackgroundService"/>
         <service android:name=".NeleusAccessibilityService"
             android:label="@string/accessibility_tip"
             android:exported="true"
