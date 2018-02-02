@@ -15,22 +15,22 @@ class NeleusAccessibilityProcess : Activity() {
         var inst=NeleusAccessibilityOperator.getInstance()
 
         inst.actionFrom()
-        Thread.sleep(1500)
+        Thread.sleep(3000)
         var list=inst.findNodesByText("音乐")
         Log.e("NeleusAccessibilityLog",list.toString())
         list?.forEach {
-            var n=it
-            while(true){
-                if (n.parent==null || n.isClickable){
+            var n = it
+            while (true) {
+                if (n.parent == null || n.isClickable) {
                     break
-                }else{
-                    Log.e("NeleusAccessibilityLog",n.toString())
-                    Log.e("NeleusAccessibilityLog","info:"+n.className+n.isClickable)
+                } else {
+                    Log.e("NeleusAccessibilityLog", n.toString())
+                    Log.e("NeleusAccessibilityLog", "info:" + n.className + n.isClickable)
                     n.performAction(AccessibilityNodeInfo.ACTION_CLICK)
-                    n=n.parent
+                    n = n.parent
                 }
             }
-            Log.e("NeleusAccessibilityLog",n.toString())
+            Log.e("NeleusAccessibilityLog", n.toString())
             n.performAction(AccessibilityNodeInfo.ACTION_CLICK)
         }
     }

@@ -9,14 +9,17 @@ import android.util.Log
  */
 class NeleusAccessibilityService : AccessibilityService(){
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        val pkgName= event?.packageName.toString()
-        val type= event?.eventType
+        //val pkgName= event?.packageName.toString()
+        //val type= event?.eventType
+        Log.e("Log:","eventType:"+event);
         NeleusAccessibilityOperator.getInstance().updateEvent(this,event)
-        when (type) {
-            AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED -> {
-
+        return
+        /*when (type) {
+            AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
+                ,AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED -> {
+                NeleusAccessibilityOperator.getInstance().updateEvent(this,event)
             }
-        }
+        }*/
     }
 
     override fun onInterrupt() {
@@ -24,9 +27,6 @@ class NeleusAccessibilityService : AccessibilityService(){
     }
 
     public override fun onServiceConnected() {
-        val serviceInfo = serviceInfo
-        serviceInfo.flags = serviceInfo.flags or AccessibilityServiceInfo.FLAG_INCLUDE_NOT_IMPORTANT_VIEWS
-        setServiceInfo(serviceInfo)
         super.onServiceConnected()
         Log.e("et","test service!!!!")
         //NeleusAccessibilityOperator.getInstance().find();
